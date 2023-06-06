@@ -1,7 +1,5 @@
 const { OrderDocument } = require('../models');
 
-
-// not implemented
 exports.storeOrderDocument = async (req, res, next) => {
     let { id } = req.params;
     let orderDocument = [];

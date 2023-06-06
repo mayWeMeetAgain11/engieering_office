@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(require('./routes/authRoute'));
 app.use(require('./routes/managerRoute'));
@@ -36,8 +36,8 @@ app.listen({ port: 3000}, async () => {
     // await Database1.sync();
     // await Database2.sync();
     // await Database2.models.EvaluationOwnerMaterial.sync();
-    // await Database1.authenticate();
-    // await Database2.authenticate();
+    await Database1.authenticate();
+    await Database2.authenticate();
     console.log('starting');
 });
 

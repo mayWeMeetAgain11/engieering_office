@@ -17,13 +17,20 @@ module.exports = (sequelize, DataTypes) => {
         },
         as: "stagedocuments"
       });
-      // this.hasMany(models.Stage, {
+      // this.hasMany(models.StageBill, {
       //   foreignKey: {
-      //     name: 'parent_stage_id',
+      //     name: 'stage_id',
       //     allowNull: true
       //   },
-      //   as: "stages"
+      //   as: "stagebills"
       // });
+      this.hasMany(models.StageMaterial, {
+        foreignKey: {
+          name: 'stage_id',
+          allowNull: true
+        },
+        as: "stagematerials"
+      });
       // this.belongsTo(models.Stage, {
       //   foreignKey: {
       //     name: 'parent_stage_id',

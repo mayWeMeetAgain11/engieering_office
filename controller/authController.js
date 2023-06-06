@@ -13,6 +13,27 @@ exports.login =  (req, res, next) => {
     }
 };
 
+// exports.contractorLogin = async (req, res, next) => {
+//     let { email, password } = req.body;
+//     try {
+//         const contractor = await Contractor.findOne({
+//             where: {
+//                 email: email
+//             }
+//         });
+//         if (!contractor) {
+//             return res.status(401).json({massage: 0});
+//         } else {
+//             if (contractor.password === password) {
+//                 return res.status(200).json(contractor);
+//             }
+//             return res.status(401).json({massage: 1});
+//         }
+//     } catch (error) {
+//         return res.status(500).json(error);
+//     }
+// };
+
 exports.engineerlogout = async (req, res, next) => {
     let { id } = req.params;
     try {
@@ -36,6 +57,31 @@ exports.managerlogout = async (req, res, next) => {
         return res.status(500).json(error);
     }
 };
+
+// exports.ownerLogin = async (req, res, next) => {
+//     const { email, password } = req.body;
+//     const owner = await Owner.findOne({
+//         where: {
+//             email: email
+//         }
+//     });
+//     if (!owner) {
+//         return res.status(401).json({massage: 0});
+//     } else {
+//         if (owner.password === password) {
+//             return res.status(200).json(owner);
+//         }
+//         return res.status(401).json({massage: 1});
+//     }
+// };
+
+
+
+
+
+
+
+
 
 async function managerLogin(email, password, res) {
     const manager = await Manager.findOne({

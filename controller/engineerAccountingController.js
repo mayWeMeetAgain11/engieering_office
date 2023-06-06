@@ -1,5 +1,6 @@
 const { Engineer, EngineerAccounting, EngineerOrder } = require('../models');
 const { Op } = require('sequelize');
+const sequelize = require('sequelize');
 
 exports.storeEngineerAccount = async (req, res, next) => {
     let { date, amount, type, order_id } = req.body;
@@ -50,6 +51,25 @@ exports.getOneEngineerAdvancePayments = async (req, res, next) => {
                 engineer_id: id,
                 engineer_order_id: {
                     [Op.ne]: null
+                }
+            }
+        });
+        return res.status(200).json(accounting);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};
+
+exports.getAllEmployeesAccountingInSpeceficDate = async (req, res, next) => {
+    let { date } = req.body;
+    try {
+        const accounting = await EngineerAccounting.findAll({
+            where: {
+                date: {
+                    [Op.between]: [
+                        Date(date.showMonthFirstDay()),
+                        Date(date.showMonthLastDay())
+                    ]
                 }
             }
         });

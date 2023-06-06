@@ -24,7 +24,11 @@ router.get('/categories', categoryController.getAllCategories);
 
 router.get('/category/:id', categoryController.getOneCategorie);
 
-router.put('/category/edit/:id', upload.single('image'), categoryController.updateCatrgory); // not implemented
+// router.post('/category/store', upload.single('image'), categoryController.storeCategory);
+
+router.post('/category/store', upload.single('image'), categoryController.storeCategory);
+
+router.put('/category/edit/:id', upload.single('image'), categoryController.updateCatrgory);
 
 router.delete('/category/delete/:id', categoryController.deleteCategory);
 

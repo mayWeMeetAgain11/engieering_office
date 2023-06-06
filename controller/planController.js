@@ -38,7 +38,7 @@ exports.storePlan = async (req, res, next) => {
         const lastRecord = await Plan.findOne({
             attributes: ['p_id'],
             order: [
-                ['plan_id', 'DESC'],
+                ['plan_id', 'DESC'], 
             ]
         });
         await Database1.query('ALTER TABLE plans CHANGE p_id p_id INT(11) NOT NULL DEFAULT :p_id', {

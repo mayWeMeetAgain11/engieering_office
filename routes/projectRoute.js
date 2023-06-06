@@ -20,6 +20,12 @@ router.get('/projects-with-no-plan', projectController.getAllProjectsWiteNoPlan)
 
 router.get('/projects/rejected', projectController.getRejectedProjects);
 
+router.get('/project-info/:project_id', projectController.getOneProjectInfo);
+
+router.get('/owner/projects-info/:owner_id', projectController.getOwnerProjectInfo);
+
+// router.get('/owner/projects/:id', projectController.getAllProjectsForOneOwner);
+
 
 
 

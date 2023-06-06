@@ -63,6 +63,21 @@ exports.getAllStageForOneProject = async (req, res, next) => {
     }
 };
 
+exports.getAllStageForOneProjectHabib = async (req, res, next) => {
+    let { id } = req.params;
+    try {
+        const stages = await Stage.findAll({
+            attributes: ['stage_id', 'project_id', 'starting_date', 'ending_date', 'ended' ],
+            where: {
+                project_id: id
+            },
+        });
+        return res.status(200).json(stages);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};
+
 exports.stageStore = async (req, res, next) => {
     try {
         // if (req.body.p_id && !req.body.stages) {

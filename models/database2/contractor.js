@@ -40,6 +40,13 @@ module.exports = (sequelize, DataTypes) => {
       //     allowNull: true
       //   },
       // });
+      this.hasMany(models.ContractorOffer, {
+        foreignKey: {
+          name: 'contractor_id',
+          allowNull: false
+        },
+        as: "contractoroffers"
+      });
     }
   }
   Contractor.init({

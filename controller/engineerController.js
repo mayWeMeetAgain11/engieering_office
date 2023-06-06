@@ -71,7 +71,7 @@ exports.storeEngineer = async (req, res, next) => {
             card_id: card_id,
             salary: salary,
         });
-        return res.status(200).json(engineers);
+        return res.status(200).json({message: `${first_name} ${last_name} added successfully`});
     } catch (error) {
         if (error.name === 'SequelizeUniqueConstraintError') {
             return res.status(400).json({
@@ -213,7 +213,7 @@ exports.getOneEngineerDeserveWithOrder = async (req, res, next) => {
                 as: 'engineerorders',
                 where: {
                     amount: {
-                        [Op.ne]: 0,
+                        [Op.ne]: 0, 
                     }
                 }
             }]

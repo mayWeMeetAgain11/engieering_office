@@ -14,35 +14,38 @@ exports.getAllContractors = async (req, res, next) => {
 exports.getOneContractorWithMaterials = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const contractor = await Contractor.findOne({
-            where: {
-                contractor_id: id
-            }
-        });
-        const materials = await Material.findAll({
-                attributes: [
+    const contractor = await Contractor.findAll({
+        where: {
+            contractor_id: id
+        },
+        include: {
+            required: false,
+            model: Material,
+            as: 'materials',
+            attributes: [
                 'material_id', 'name', 'image', 'unit_price', 'qualification',
-                [Sequelize.fn('COALESCE', Sequelize.fn('AVG', Sequelize.col('evaluationownermaterials.value')), 0), 'owner_rate'],
-                [Sequelize.fn('COALESCE', Sequelize.fn('AVG', Sequelize.col('evaluationenginnermaterials.value')), 0), 'engineer_rate']
-                ],
-                where: {
-                    contractor_id: id
-                },
-                include: [
-                    {
+                [Sequelize.fn('COALESCE', Sequelize.fn('AVG', Sequelize.col('materials->evaluationownermaterials.value')), 0), 'owner_rate'],
+                [Sequelize.fn('COALESCE', Sequelize.fn('AVG', Sequelize.col('materials->evaluationenginnermaterials.value')), 0), 'engineer_rate']
+            ],
+            include: [
+                {
                     model: EvaluationOwnerMaterial,
-                    as: 'evaluationownermaterials', 
+                    as: 'evaluationownermaterials',
                     attributes: [],
-                    },
-                    {
+                },
+                {
                     model: EvaluationEnginnerMaterial,
                     as: 'evaluationenginnermaterials',
                     attributes: [],
-                    },
-                ],
-                group: 'material_id',
-        });
-            return res.status(200).json({ contractor: contractor, materials: materials });
+                },
+            ],
+            group: ['Material.material_id']
+        },
+    });
+    if (!contractor[0].contractor_id) {
+        return res.status(404).json({msg: 'contractor not found'});
+    }
+            return res.status(200).json(contractor);
     } catch (error) {
         return res.status(500).json(error);
     }

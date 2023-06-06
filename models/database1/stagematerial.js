@@ -17,6 +17,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         as: "contractor_bills"
       });
+      this.belongsTo(models.Stage, {
+        foreignKey: {
+          name: 'stage_id',
+          allowNull: true
+        },
+        as: "stage"
+      });
     }
   }
   StageMaterial.init({
