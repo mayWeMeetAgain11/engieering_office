@@ -20,6 +20,8 @@ const upload = multer({ storage: fileStorage, fileFilter: fileFilter });
 
 const stageDocumentController = require('../controller/stageDocumentController');
 
-router.post('/stage-document/store', upload.single('pdf'), stageDocumentController.storeStageDocument);
+const stageValidation = require('../validation/stageValidation');
+
+router.post('/stage-document/store', stageValidation.storeStageDocument, upload.single('pdf'), stageDocumentController.storeStageDocument);
 
 module.exports = router;

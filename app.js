@@ -31,7 +31,7 @@ app.use(require('./routes/latencyDocumentRoute'));
 app.use(require('./routes/engineerOrderRoute'));
 app.use(require('./routes/absenceOrderRoute'));
 
-app.listen( { port: 3000,}, async () => {
+app.listen({ port: 3000}, async () => {
     // { focus: true }
     // await Database1.sync();
     // await Database2.sync();

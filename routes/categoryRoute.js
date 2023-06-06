@@ -6,7 +6,7 @@ const fileStorage = multer.diskStorage({
         cb(null, 'public/images/categories');
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, Date.now() + file.originalname );
         // new date().toISOString() + '-' + 
     }
 });

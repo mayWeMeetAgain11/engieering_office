@@ -4,7 +4,9 @@ const router = express.Router();
 
 const authController = require('../controller/authController');
 
-router.post('/login', authController.login);
+const authValidation = require('../validation/authValidation');
+
+router.post('/login', authValidation.login, authController.login);
 
 router.put('/engineer-logout/:id', authController.engineerlogout);
 

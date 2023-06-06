@@ -20,6 +20,8 @@ const upload = multer({ storage: fileStorage, fileFilter: fileFilter });
 
 const latencyDocumentController = require('../controller/latencyDocumentController');
 
-router.post('/latency-document/store', upload.single('pdf'), latencyDocumentController.storeLatencyDocument);
+const latencyDocumentValidation = require('../validation/latencyValidation');
+
+router.post('/latency-document/store', latencyDocumentValidation.storeLatencyDocument, upload.single('pdf'), latencyDocumentController.storeLatencyDocument);
 
 module.exports = router;

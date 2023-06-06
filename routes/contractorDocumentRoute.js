@@ -20,9 +20,8 @@ const upload = multer({ storage: fileStorage, fileFilter: fileFilter });
 
 const contractorDocumentController = require('../controller/contractorDocumentController');
 
+const contractorValidation = require('../validation/contractorValidation');
 
-router.post('/contractor-document/store', upload.single('pdf'), contractorDocumentController.contractorDocumentStore);
-
-
+router.post('/contractor-document/store', contractorValidation.storContractorDocument, upload.single('pdf'), contractorDocumentController.contractorDocumentStore);
 
 module.exports = router;

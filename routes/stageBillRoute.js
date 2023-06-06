@@ -4,6 +4,8 @@ const router = express.Router();
 
 const stageBillController = require('../controller/stageBillController');
 
-router.post('/stage-bill/store', stageBillController.storeStageBill);
+const stageValidation = require('../validation/stageValidation');
+
+router.post('/stage-bill/store', stageValidation.storeStageBill, stageBillController.storeStageBill);
 
 module.exports = router;
